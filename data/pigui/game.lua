@@ -66,12 +66,16 @@ local function displayReticuleHorizon(roll_degrees)
 	local radius = reticuleCircleRadius - offset
 	-- left hook
 	ui.lineOnClock(center, hrs, width, radius, colors.navigationalElements, 1)
-	ui.lineOnClock(nil, hrs + height_hrs, width, radius, colors.navigationalElements, 1)
-	ui.lineOnClock(nil, -3, width/2, radius, colors.navigationalElements, 1)
+	ui.addLine(ui.pointOnClock(center, radius, hrs),
+	           ui.pointOnClock(center, radius, hrs + height_hrs),
+	           colors.navigationalElements, 1)
+	ui.lineOnClock(nil, -3, -width/2, radius, colors.navigationalElements, 1)
 	-- right hook
 	ui.lineOnClock(nil, hrs + 6, width, radius, colors.navigationalElements, 1)
-	ui.lineOnClock(nil, hrs + 6 - height_hrs, width, radius, colors.navigationalElements, 1)
-	ui.lineOnClock(nil, 3, width/2, radius, colors.navigationalElements, 1)
+	ui.addLine(ui.pointOnClock(center, radius, hrs + 6),
+	           ui.pointOnClock(center, radius, hrs + 6 - height_hrs),
+	           colors.navigationalElements, 1)
+	ui.lineOnClock(nil, 3, -width/2, radius, colors.navigationalElements, 1)
 end
 
 -- display the compass at the top of the reticule circle
