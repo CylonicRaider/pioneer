@@ -171,7 +171,7 @@ static int l_vector_magnitude(lua_State *L)
 static int l_vector_angle(lua_State *L)
 {
 	const vector2d *v = LuaVector2::CheckFromLua(L, 1);
-	lua_pushnumber(L, atan2(v->x, v->y));
+	lua_pushnumber(L, M_PI * 2 - atan2(v->x, v->y));
 	return 1;
 }
 
