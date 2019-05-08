@@ -345,9 +345,8 @@ local function displayDetailData(target, radius, combatTarget, navTarget, colorL
 	-- current distance, relative speed
 	uiPos = ui.pointOnClock(center, radius, 2.75)
 	-- currently unused: local distance, distance_unit = ui.Format.Distance(player:DistanceTo(target))
-	local approach_speed = position:dot(velocity) / position:magnitude()
-
-	speed, speed_unit = ui.Format.Speed(velocity:length())
+	local approach_speed = position:dot(velocity) / position:length()
+	local speed, speed_unit = ui.Format.Speed(approach_speed)
 
 	ui.addFancyText(uiPos, ui.anchor.left, ui.anchor.baseline, {
 										{ text=speed,      color=colorLight, font=pionillium.medium, tooltip=lui.HUD_SPEED_OF_APPROACH_TO_TARGET },
@@ -360,7 +359,7 @@ local function displayDetailData(target, radius, combatTarget, navTarget, colorL
 	local altitude = player:GetAltitudeRelTo(target)
 	local ratio = brake_distance / altitude
 	local ratio_retro = brake_distance_retro / altitude
-
+	speed, speed_unit = ui.Format.Speed(velocity:length())
 
 	uiPos = ui.pointOnClock(center, radius, 3)
 	local distance,unit = ui.Format.Distance(brake_distance)
@@ -435,7 +434,7 @@ local function displayFrameData(frame, radius)
 	local altitude = player:GetAltitudeRelTo(frame)
 	local brake_distance = player:GetDistanceToZeroV(velocity:length(),"forward")
 	local altitude, altitude_unit = ui.Format.Distance(altitude)
-	local approach_speed = position:dot(velocity) / position:magnitude()
+	local approach_speed = position:dot(velocity) / position:length()
 	local speed, speed_unit = ui.Format.Speed(approach_speed)
 	local uiPos = ui.pointOnClock(center, radius, -2.46)
 	-- label of frame
