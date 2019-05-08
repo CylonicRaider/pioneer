@@ -228,9 +228,9 @@ local function displayDirectionalMarkers()
 	local function angle(forward, adjust)
 		local aux2 = Vector2(forward.x, forward.y)
 		if forward.z >= 1 then
-			return aux2:angle() + adjust - ui.pi
+			return -aux2:angle() + adjust + ui.pi
 		else
-			return aux2:angle() + adjust
+			return -aux2:angle() + adjust
 		end
 	end
 	aux.z = -1
@@ -245,9 +245,9 @@ local function displayDirectionalMarkers()
 	showDirection = displayDirectionalMarker(aux, icons.down, showDirection, angle(forward, 0))
 	aux.y = 0
 	aux.x = 1
-	showDirection = displayDirectionalMarker(aux, icons.right, showDirection)
+	showDirection = displayDirectionalMarker(aux, icons.right, showDirection, angle(forward, -ui.pi / 2))
 	aux.x = -1
-	showDirection = displayDirectionalMarker(aux, icons.left, showDirection)
+	showDirection = displayDirectionalMarker(aux, icons.left, showDirection, angle(forward, ui.pi / 2))
 
 	if showDirection then
 		ui.addIcon(center, icons.direction_forward, colors.reticuleCircle, Vector2(32, 32), ui.anchor.center, ui.anchor.center, nil, angle(forward, 0))
